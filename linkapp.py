@@ -57,15 +57,13 @@ printerr("Create wrapper script [y/n]? ")
 ans = sys.stdin.read(1)
 if ans.lower() == 'y':
     os.chdir('MacOS')
-
+    
     wrapper_script_file = 'run_with_specified_arguments.sh'
     
     original_executable = replace_executable('../Info.plist', wrapper_script_file)
-    
     
     with open(wrapper_script_file, 'w') as f:
         f.write(WRAPPER_SCRIPT % original_executable)
     os.chmod(wrapper_script_file, 0755)
     
-    
-    subprocess.call(['open', '-a', 'TextEdit', wrapper_script_file])
+    subprocess.call(['open', '-R', wrapper_script_file])
