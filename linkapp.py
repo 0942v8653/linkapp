@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-
-if len(sys.argv) <= 2:
-    printerr("Usage: linkapp.py <app-bundle> <new-place>\n")
-    exit(1)
-
 import os
 import shutil
 import subprocess
@@ -31,6 +26,12 @@ def replace_executable(filename, new_executable):
     old_executable = old_executable.rstrip()
     subprocess.call(['defaults', 'write', os.path.abspath(filename), 'CFBundleExecutable', new_executable])
     return old_executable
+
+
+if len(sys.argv) <= 2:
+    printerr("Usage: linkapp.py <app-bundle> <new-place>\n")
+    exit(1)
+
 
 bundle_path = os.path.abspath(sys.argv[1])
 bundle_contents_path = os.path.join(bundle_path, 'Contents')
